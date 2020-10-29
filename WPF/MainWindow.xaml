@@ -1,0 +1,110 @@
+﻿<Window x:Class="MasterDetailsViewDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MasterDetailsViewDemo"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        Title="Customized EnterKey Behavior" Icon="App.ico"
+        Height="710" Width="1024" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style TargetType="syncfusion:GridCell"
+               x:Key="KeyGridCellColumnCellStyle" >
+            <Setter Property="IsEnabled" Value="False" />
+            <Setter Property="ToolTip">
+                <Setter.Value>
+                    <TextBlock Text="{Binding ShipCountry}" ToolTipService.IsEnabled="True" 
+                                       ToolTipService.ShowOnDisabled="True"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ToolTipService.IsEnabled" Value="True" />
+            <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
+        </Style>
+
+        <Style TargetType="syncfusion:GridCell"
+               x:Key="KeyGridCellColumnCellStyle1" >
+            <Setter Property="IsEnabled" Value="True" />
+            <Setter Property="ToolTipService.IsEnabled" Value="True" />
+            <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
+        </Style>
+
+    </Window.Resources>
+
+    <Window.DataContext>
+        <local:ViewModel />
+    </Window.DataContext>
+    
+    <Grid>
+        <syncfusion:SfDataGrid x:Name="dataGrid"
+                               AutoGenerateColumns="False"
+                               HideEmptyGridViewDefinition="True"
+                               ItemsSource="{Binding Path=OrdersDetails}"
+                               NavigationMode="Row"
+                               AllowEditing="True"
+                               EditTrigger="OnTap"  
+                               ShowGroupDropArea="True"
+                               ColumnSizer="Auto"
+                               FilterChanged="dataGrid_FilterChanged"
+                               AllowFiltering="True"
+                               ShowToolTip="true">
+            <syncfusion:SfDataGrid.DetailsViewDefinition>
+                <syncfusion:GridViewDefinition RelationalColumn="OrderDetails">
+                    <syncfusion:GridViewDefinition.DataGrid>
+                        <syncfusion:SfDataGrid x:Name="FirstDetailsViewGrid"  NavigationMode="Cell" AllowEditing="True">
+                            <syncfusion:SfDataGrid.Columns>
+                                <syncfusion:GridTextColumn MappingName="OrderID" />
+                                <syncfusion:GridTextColumn MappingName="ProductID" TextAlignment="Right" />
+                                <syncfusion:GridTextColumn HeaderText="Unit Price"
+                                                           MappingName="UnitPrice"
+                                                           TextAlignment="Right" />
+                                <syncfusion:GridTextColumn MappingName="Quantity" TextAlignment="Right" />
+                                <syncfusion:GridTextColumn MappingName="Discount" TextAlignment="Right" />
+                                <syncfusion:GridTextColumn MappingName="CustomerID" />
+                                <syncfusion:GridDateTimeColumn HeaderText="Order Date"
+                                                               MappingName="OrderDate"
+                                                               TextAlignment="Right" />
+                            </syncfusion:SfDataGrid.Columns>
+                        </syncfusion:SfDataGrid>
+                    </syncfusion:GridViewDefinition.DataGrid>
+                </syncfusion:GridViewDefinition>
+            </syncfusion:SfDataGrid.DetailsViewDefinition>
+            
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:GridTextColumn MappingName="OrderID" HeaderText="Order ID" />
+                <syncfusion:GridTextColumn MappingName="CustomerID" HeaderText="Customer ID" />
+                <syncfusion:GridDateTimeColumn Width="200"
+                                               HeaderText="Shipping Date"
+                                               MappingName="ShippingDate"
+                                               TextAlignment="Right" ></syncfusion:GridDateTimeColumn>
+                <syncfusion:GridTextColumn MappingName="EmployeeID" HeaderText="Employee ID" TextAlignment="Right" />
+                <syncfusion:GridTextColumn HeaderText="Ship City" MappingName="ShipCity" />
+                <syncfusion:GridTextColumn HeaderText="Ship Country" MappingName="ShipCountry" 
+                                           CellStyle="{StaticResource KeyGridCellColumnCellStyle}"  ShowToolTip="true">
+                    <syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Ship Country" />
+                        </DataTemplate>
+                    </syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                </syncfusion:GridTextColumn>
+                <syncfusion:GridTextColumn MappingName="Freight" TextAlignment="Right" CellStyle="{StaticResource KeyGridCellColumnCellStyle1}" ShowToolTip="true">
+                    <syncfusion:GridTextColumn.HeaderToolTipTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Freight" />
+                        </DataTemplate>
+                    </syncfusion:GridTextColumn.HeaderToolTipTemplate>
+
+                    <syncfusion:GridTextColumn.ToolTipTemplate>
+
+                        <DataTemplate>
+
+                            <TextBlock Text="{Binding Freight}" ToolTipService.IsEnabled="True"
+                                       ToolTipService.ShowOnDisabled="True"/>
+
+                        </DataTemplate>
+
+                    </syncfusion:GridTextColumn.ToolTipTemplate>
+                </syncfusion:GridTextColumn>
+                <syncfusion:GridCheckBoxColumn HeaderText="Closed" MappingName="IsClosed" />
+            </syncfusion:SfDataGrid.Columns>
+        </syncfusion:SfDataGrid>
+    </Grid>
+</Window>
