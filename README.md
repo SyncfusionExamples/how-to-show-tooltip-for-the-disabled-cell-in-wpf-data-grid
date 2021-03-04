@@ -4,7 +4,7 @@ How to show tooltip for the disabled cell in WPF DataGrid (SfDataGrid)?
 
 # About the sample
 
-By default SfDataGrid, shown ToolTip through OnMouseEnter event. But when you set IsEnabled as false to the GridCell by the framework this event can’t triggered and tooltip not shown for the disabled cells. You can show the Tooltip for disabled cells by setting the values to ToolTipPemplate of the column.
+This sample show cases how to show tooltip for disabled cells in [WPF DataGrid](https://www.syncfusion.com/wpf-ui-controls/datagrid) (SfDataGrid). The tooltip will not be displayed for disabled cells in datagrid. You can show tooltip for disabled cells by setting ToolTipPlacement property of column.
 
 ```Xaml
 <Style TargetType="syncfusion:GridCell"
