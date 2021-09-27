@@ -22,5 +22,8 @@ This sample show cases how to show tooltip for disabled cells in [WPF DataGrid](
 <syncfusion:GridTextColumn HeaderText="Ship Country" MappingName="ShipCountry" 
                         CellStyle="{StaticResource KeyGridCellColumnCellStyle}"  ShowToolTip="true">
 ```
+
+KB article - [How to show tooltip for the disabled cell in WPF DataGrid (SfDataGrid)?](https://www.syncfusion.com/kb/12015/how-to-show-tooltip-for-the-disabled-cell-in-wpf-datagrid-sfdatagrid)
+
 ## Requirements to run the demo
  Visual Studio 2015 and above versions
